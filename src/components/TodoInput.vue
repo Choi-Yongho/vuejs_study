@@ -1,7 +1,7 @@
 <template>
     <div class="inputBox shadow">
-        <input type="text" v-model="newTodoITem" placeholder="Type what you have to do" v-on:keyup.enter="addTodo">
-        <span class="addContainer" v-on:click="addTodo">
+        <input type="text" v-model="newTodoITem" placeholder="Type what you have to do" @keyup.enter="addTodo">
+        <span class="addContainer" @click="addTodo">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
     </div>
@@ -16,9 +16,10 @@ export default {
     },
     methods: {
         addTodo() {
+            // 저장발생이후 emit을 통해 addTodoEmit 이벤트로 상위에 올린다.
             if(this.newTodoITem !== "") {
                 var value = this.newTodoITem && this.newTodoITem.trim();
-                localStorage.setItem(value, value);
+                this.$emit('addTodoEmit', value);
                 this.clearInput();
             }
         },

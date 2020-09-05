@@ -1,7 +1,7 @@
 <template>
     <section>
         <ul>
-            <li v-for="(todoItem, index) in todoItems" :key="todoItem" class="shadow">
+            <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
                 <i class="checkBtn fas fa-check" aria-hidden="true"></i>
                 {{ todoItem }}
                 <span class="removeBtn" type="button" @click="removeTodo(todoItem, index)">
@@ -14,24 +14,10 @@
 
 <script>
 export default {
-    data() {
-        return {
-            todoItems: []
-        }
-    },
-    created() {
-        if(localStorage.length > 0) {
-            for(var i=0; i<localStorage.length; i++) {
-                if(localStorage.key(i) != "loglevel:webpack-dev-server") {
-                    this.todoItems.push(localStorage.key(i));
-                }
-            }
-        }
-    },
+    props: ['propsdata'],       // 상위에서 전달한 데이타를 가지고 있는다. 
     methods: {
         removeTodo(todoItem, index) {
-            localStorage.removeItem(todoItem);
-            this.todoItems.splice(index, 1);
+            this.$emit("removeTodoEmit", todoItem, index);
         }
     }
 }

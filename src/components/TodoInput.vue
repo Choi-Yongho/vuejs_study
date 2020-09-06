@@ -34,7 +34,7 @@ export default {
         addTodo() {
             // 저장발생이후 emit을 통해 addTodoEmit 이벤트로 상위에 올린다.
             if(this.newTodoITem !== "") {
-                var value = this.newTodoITem && this.newTodoITem.trim();
+                const value = this.newTodoITem && this.newTodoITem.trim();
                 this.$emit('addTodoEmit', value);
                 this.clearInput();
             } else {
